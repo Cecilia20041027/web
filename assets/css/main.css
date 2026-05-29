@@ -89,14 +89,14 @@ h6 {
 
 /* PHP Email Form Messages
 ------------------------------*/
-.php-email-form .error-message {
-  display: none;
-  background: #df1529;
-  color: #32292f;
-  text-align: left;
-  padding: 15px;
-  margin-bottom: 24px;
-  font-weight: 600;
+.php-email-form .error-message {display: none !important;
+  visibility: hidden !important; /* 隱藏元素 */
+  opacity: 0 !important;          /* 變成完全透明 */
+  height: 0 !important;           /* 高度歸零 */
+  padding: 0 !important;          /* 內邊距歸零（消滅紅色大區塊） */
+  margin: 0 !important;           /* 外邊距歸零 */
+  border: none !important;        /* 拔掉任何邊框 */
+  font-size: 0 !important;        /* 字體縮小到不見 */
 }
 
 .php-email-form .sent-message {
@@ -1171,6 +1171,12 @@ section,
   text-align: center;
 }
 
+.stats .stat-item{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .stats .stat-item .stat-number {
   font-family: var(--heading-font);
   font-size: 72px;
@@ -1990,6 +1996,66 @@ section,
 }
 
 /*--------------------------------------------------------------
+#specialty section
+--------------------------------------------------------------*/
+.specialty{
+  padding-top: 40px;
+  padding-bottom: 40px;
+}
+.specialty-title {
+  text-align: center;
+  padding-bottom: 15px;
+  position: relative;
+}
+
+.specialty-title h2 {
+  font-size: 32px;
+  font-weight: 300;
+  margin-bottom: 15px;
+  padding-bottom: 15px;
+  position: relative;
+}
+
+.specialty-title h2:before {
+  content: "";
+  position: absolute;
+  display: block;
+  width: 160px;
+  height: 1px;
+  background: color-mix(in srgb, var(--default-color), transparent 60%);
+  left: 0;
+  right: 0;
+  bottom: 1px;
+  margin: auto;
+}
+
+.specialty-title h2::after {
+  content: "";
+  position: absolute;
+  display: block;
+  width: 60px;
+  height: 3px;
+  background: var(--accent-color);
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+}
+
+.specialty-title p {
+  margin-bottom: 0;
+}
+
+.specialty-category{
+  margin-bottom: 30px;
+}
+
+.specialty .specialty-category h3{
+  font-size: 24px;
+  font-weight: 300;
+}
+
+/*--------------------------------------------------------------
 # Portfolio Section
 --------------------------------------------------------------*/
 .portfolio .filters-wrapper {
@@ -2041,11 +2107,11 @@ section,
   color: var(--heading-color);
 }
 
-.portfolio .portfolio-filters li.filter-active {
+.portfolio .portfolio-filters li.filter-all {
   color: var(--heading-color);
 }
 
-.portfolio .portfolio-filters li.filter-active::after {
+.portfolio .portfolio-filters li.filter-all::after {
   width: 100%;
 }
 
@@ -2408,13 +2474,58 @@ section,
 }
 
 .testimonials .stars-rating {
-  display: flex;
-  gap: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
 }
 
-.testimonials .stars-rating i {
-  color: #ffc107;
-  font-size: 1.25rem;
+.testimonials .stars-rating > i {
+    color: #ffc107;
+    font-size: 1.25rem;
+}
+
+.testimonials .half-music,
+.testimonials .empty-music {
+    position: relative;     
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.25rem;
+    height: 1.75rem;        
+    flex-shrink: 0;
+}
+
+/* 底層淡色 */
+.testimonials .base-icon{
+    color: rgba(255,255,255,0.25);
+}
+
+/* 確保只有在 half-music 或評分容器內的 icon 才進行絕對定位 */
+.testimonials .half-music .base-icon,
+.testimonials .half-music .fill-icon i,
+.testimonials .empty-music .base-icon {
+    position: absolute;
+    top: 0;
+    left: 0;
+    font-size: 1.25rem;
+}
+
+/* 上層半填色 */
+.testimonials .fill-icon{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 60%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.testimonials .fill-icon i{
+    color: #ffc107;
+}
+
+.testimonials .base-icon{
+    color: rgba(255,255,255,0.25) !important;
 }
 
 .testimonials .quote-icon {
@@ -2440,7 +2551,7 @@ section,
 .testimonials .testimonial-body p {
   font-size: 1.25rem;
   line-height: 1.8;
-  font-style: italic;
+  font-style: normal;
   color: var(--heading-color);
   margin: 0;
   position: relative;
